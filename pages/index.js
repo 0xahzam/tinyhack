@@ -27,7 +27,7 @@ export default function index() {
         >
           <Flex
             flexDir={"column"}
-            w={["400px", "400px", "662px"]}
+            w={["300px", "300px", "662px"]}
             fontWeight={"normal"}
             fontSize={"18px"}
             color={"#222222"}
@@ -79,7 +79,7 @@ export default function index() {
       <Flex
         position={"fixed"}
         bottom={"0"}
-        w={["400px", "400px", "662px"]}
+        w={["300px", "300px", "662px"]}
         bg={"white"}
         borderTop={"1px solid black"}
         justify={"center"}
