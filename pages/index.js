@@ -15,7 +15,12 @@ export default function index() {
             tinyhack
           </Text>
           <Text fontWeight={"medium"} fontSize={"20px"} color={"#444444"}>
-            <a className="link" href={"https://eif3.devfolio.co/"}>
+            <a
+              className="link"
+              href={"https://eif3.devfolio.co/"}
+              target={"_blank"}
+              rel={"noreferrer"}
+            >
               // building at EIF3.0
             </a>
           </Text>
@@ -91,12 +96,22 @@ export default function index() {
         >
           <Text fontSize={"18px"} marginTop={"20px"} marginBottom={"20px"}>
             by{" "}
-            <a className="link" href="https://twitter.com/0xahzam">
+            <a
+              className="link"
+              href="https://twitter.com/0xahzam"
+              target={"_blank"}
+              rel={"noreferrer"}
+            >
               {" "}
               ahzam{" "}
             </a>{" "}
             and{" "}
-            <a className="link" href="https://twitter.com/apooooorva9">
+            <a
+              className="link"
+              href="https://twitter.com/apooooorva9"
+              target={"_blank"}
+              rel={"noreferrer"}
+            >
               apoorva
             </a>
           </Text>
