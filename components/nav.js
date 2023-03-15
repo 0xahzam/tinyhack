@@ -32,7 +32,7 @@ export default function Nav() {
   return (
     <>
       <Flex
-        gap={{ base: "200px", md:"500px", lg: "800px", xl: "1021px" }}
+        gap={{ base: "150px", md:"500px", lg: "800px", xl: "1021px" }}
         align={"center"}
         mt={"42px"}
         color={"black"}

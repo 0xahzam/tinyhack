@@ -30,7 +30,7 @@ export default function index() {
         <Flex
           fontSize={{ base: "28px", md: "32px", lg: "45px", xl: "55px" }}
           fontWeight={"semibold"}
-          w={{ base: "300px", md: "400px", lg: "679px", xl: "679px" }}
+          w={{ base: "250px", md: "400px", lg: "679px", xl: "679px" }}
         >
           <Typewriter
             onInit={(typewriter) => {
