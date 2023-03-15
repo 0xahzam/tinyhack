@@ -30,7 +30,7 @@ export default function index() {
         <Flex
           fontSize={{ base: "28px", md: "32px", lg: "45px", xl: "55px" }}
           fontWeight={"semibold"}
-          w={{ base: "250px", md: "400px", lg: "679px", xl: "679px" }}
+          w={{ base: "250px", md: "400px", lg: "779px", xl: "779px" }}
         >
           <Typewriter
             onInit={(typewriter) => {
@@ -38,8 +38,11 @@ export default function index() {
                 .typeString("securing smart contracts made easy.")
                 .pauseFor(2500)
                 .deleteAll()
+                .typeString("no smart contract is smart if it ain't secure.")
+                .pauseFor(2500)
+                .deleteAll()
                 .typeString(
-                  "making it easier and accessible to write more secure contracts."
+                  "your friendly neighbourhood smart contract bodyguard."
                 )
                 .start();
             }}
