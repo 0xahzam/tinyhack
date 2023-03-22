@@ -1,5 +1,4 @@
 import "@/styles/globals.css";
-import "@fontsource/space-grotesk";
 import { ChakraProvider } from "@chakra-ui/react";
 import Head from "next/head";
 
@@ -14,10 +13,11 @@ function MyApp({ Component, pageProps }) {
           content="width=device-width, initial-scale=1.0"
         />
 
-        <meta name="title" content="tinyhack" />
+        <meta name="title" content="Tinyhack" />
         <meta
           name="description"
-          content="your friendly neighbourhood smart contract bodyguard"
+          content="A project with a goal to create better habits for writing more secure
+          contracts."
         />
 
         <meta property="og:type" content="website" key="og-type" />
@@ -26,15 +26,16 @@ function MyApp({ Component, pageProps }) {
           content="https://tinyhack.vercel.app/"
           key="og-url"
         />
-        <meta property="og:title" content="tinyhack" key="og-title" />
+        <meta property="og:title" content="Tinyhack" key="og-title" />
         <meta
           property="og:description"
-          content="your friendly neighbourhood smart contract bodyguard"
+          content="A project with a goal to create better habits for writing more secure
+          contracts."
           key="og-desc"
         />
         <meta
           property="og:image"
-          content="https://i.ibb.co/nMxgTNG/tinyhackog.png"
+          content="https://i.ibb.co/ZTS6YFq/tinyhacknewog.png"
           key="og-image"
         />
 
@@ -44,15 +45,16 @@ function MyApp({ Component, pageProps }) {
           content="https://tinyhack.vercel.app/"
           key="twt-url"
         />
-        <meta property="twitter:title" content="tinyhack  " key="twt-title" />
+        <meta property="twitter:title" content="Tinyhack  " key="twt-title" />
         <meta
           property="twitter:description"
-          content="your friendly neighbourhood smart contract bodyguard"
+          content="A project with a goal to create better habits for writing more secure
+          contracts."
           key="twt-desc"
         />
         <meta
           property="twitter:image"
-          content="https://i.ibb.co/nMxgTNG/tinyhackog.png"
+          content="https://i.ibb.co/ZTS6YFq/tinyhacknewog.png"
           key="twt-img"
         />
       </Head>
