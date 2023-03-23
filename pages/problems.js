@@ -4,6 +4,7 @@ import { Flex } from "@chakra-ui/react";
 export default function problems() {
   return (
     <Flex
+      className="font"
       minH={"100vh"}
       background={"#181818"}
       flexDir={"column"}

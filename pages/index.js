@@ -1,4 +1,5 @@
 import { Flex, Text, Button, Image } from "@chakra-ui/react";
+import Link from "next/link";
 
 const art = `
 ████████╗██╗███╗   ██╗██╗   ██╗    ██╗  ██╗ █████╗  ██████╗██╗  ██╗
@@ -14,6 +15,7 @@ console.log(art);
 export default function index() {
   return (
     <Flex
+      className="font"
       background={"#181818"}
       flexDir={"column"}
       color={"white"}
@@ -52,19 +54,24 @@ export default function index() {
             </Text>
           </Flex>
           <Flex gap={"20.35px"}>
-            <Button
-              height={"47px"}
-              paddingRight={"25px"}
-              paddingLeft={"25px"}
-              rounded={"4px"}
-              bg={"#528D51"}
-              fontSize={"20px"}
-              fontWeight={"normal"}
-              _hover={{ background: "" }}
-              _active={{}}
-            >
-              Start Solving
-            </Button>
+            <Link href={"./problems"}>
+              <Button
+                height={"47px"}
+                paddingRight={"25px"}
+                paddingLeft={"25px"}
+                rounded={"4px"}
+                bg={"#528D51"}
+                fontSize={"20px"}
+                fontWeight={"normal"}
+                _hover={{
+                  background: "#497E48",
+                  boxShadow: "0px 1px 12px rgba(255,255,255,0.05)",
+                }}
+                _active={{}}
+              >
+                Start Solving
+              </Button>
+            </Link>
             <Button
               height={"47px"}
               paddingRight={"25px"}
@@ -74,7 +81,10 @@ export default function index() {
               border={"1px solid rgba(255, 255, 255, 0.1)"}
               fontSize={"20px"}
               fontWeight={"normal"}
-              _hover={{}}
+              _hover={{
+                background: "rgba(255, 255, 255, 0.02)",
+                boxShadow: "0px 1px 12px rgba(255,255,255,0.05)",
+              }}
               _active={{}}
             >
               Learn First
