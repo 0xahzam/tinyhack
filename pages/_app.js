@@ -1,4 +1,4 @@
-import "@/styles/globals.css";
+import "/styles/globals.css";
 import { ChakraProvider } from "@chakra-ui/react";
 import { goerli } from "wagmi/chains";
 import Head from "next/head";

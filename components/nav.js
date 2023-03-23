@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import { Flex, Text } from "@chakra-ui/react";
-import { ConnectBtn } from "@/components/custombutton";
+import { ConnectBtn } from "/components/custombutton";
 import Link from "next/link";
 
 export default function Nav() {

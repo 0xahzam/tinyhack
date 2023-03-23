@@ -1,7 +1,25 @@
-import Nav from "@/components/nav";
-import Card from "@/components/card";
+import Nav from "/components/nav";
+import Card from "/components/card";
 import { Flex } from "@chakra-ui/react";
+import axios from "axios";
+import { useState, useEffect } from "react";
+
 export default function problems() {
+  const [ques, setQues] = useState([]);
+  const highlight = [0];
+  async function getQuestions() {
+    try {
+      const response = await axios.get("/api/script");
+      setQues(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  useEffect(() => {
+    getQuestions();
+  }, [ques]);
+
   return (
     <Flex
       className="font"
@@ -18,8 +36,19 @@ export default function problems() {
         marginTop={"60px"}
         marginBottom={"60px"}
         align={"center"}
+        color={"white"}
       >
-        <Card solved={"true"} tag={"DEFI"} title={"Uniswap Validation"} />
+        {ques.map((item) => (
+          <div key={item.id}>
+            <Card
+              solved={item.id in highlight ? "true" : "false"}
+              tag={item.tag}
+              title={item.title}
+            />
+          </div>
+        ))}
+
+        {/* <Card solved={"true"} tag={"DEFI"} title={"Uniswap Validation"} />
         <Card solved={"false"} tag={"DEFI"} title={"Uniswap Validation"} />
         <Card solved={"false"} tag={"DEFI"} title={"Uniswap Validation"} />
         <Card solved={"false"} tag={"DEFI"} title={"Uniswap Validation"} />
@@ -27,7 +56,7 @@ export default function problems() {
         <Card solved={"false"} tag={"DEFI"} title={"Uniswap Validation"} />
         <Card solved={"false"} tag={"DEFI"} title={"Uniswap Validation"} />
         <Card solved={"false"} tag={"DEFI"} title={"Uniswap Validation"} />
-        <Card solved={"false"} tag={"DEFI"} title={"Uniswap Validation"} />
+        <Card solved={"false"} tag={"DEFI"} title={"Uniswap Validation"} /> */}
       </Flex>
     </Flex>
   );
