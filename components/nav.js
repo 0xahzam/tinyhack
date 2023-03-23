@@ -25,7 +25,12 @@ export default function Nav() {
       justify={"center"}
       borderBottom={"1px solid rgba(255, 255, 255, 0.2)"}
     >
-      <Flex h={"94px"} gap={"713px"} align={"center"}>
+      <Flex
+        h={"94px"}
+        w={"1302px"}
+        justifyContent={"space-between"}
+        align={"center"}
+      >
         <Flex gap={"25px"} align={"center"}>
           <Text fontSize={"26px"} fontWeight={"bold"} userSelect={"none"}>
             Tinyhack

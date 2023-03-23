@@ -1,4 +1,3 @@
-import React from "react";
 import Nav from "@/components/nav";
 import Card from "@/components/card";
 import { Flex } from "@chakra-ui/react";
@@ -12,7 +11,13 @@ export default function problems() {
       cursor={"default"}
     >
       <Nav />
-      <Flex gap={"20px"} flexDir={"column"} marginTop={"60px"} marginBottom={"60px"} align={"center"}>
+      <Flex
+        gap={"20px"}
+        flexDir={"column"}
+        marginTop={"60px"}
+        marginBottom={"60px"}
+        align={"center"}
+      >
         <Card solved={"true"} tag={"DEFI"} title={"Uniswap Validation"} />
         <Card solved={"false"} tag={"DEFI"} title={"Uniswap Validation"} />
         <Card solved={"false"} tag={"DEFI"} title={"Uniswap Validation"} />

@@ -1,15 +1,23 @@
-import { ConnectButton } from "@rainbow-me/rainbowkit";
-import { Button } from "@chakra-ui/react";
 import { useAccount } from "wagmi";
+import { useEffect, useState } from "react";
+import { ConnectButton } from "@rainbow-me/rainbowkit";
+import { Button, Flex, Image } from "@chakra-ui/react";
 
 export const ConnectBtn = () => {
-  const breakpoints = {
-    sm: "30em",
-    md: "48em",
-    lg: "62em",
-    xl: "80em",
-    "2xl": "96em",
-  };
+  const { address, isConnected } = useAccount();
+  const [addr, setAddr] = useState();
+
+  useEffect(() => {
+    isConnected
+      ? setAddr(
+          address.slice(0, 4) +
+            "..." +
+            address.slice(-5, -1) +
+            address.charAt(address.length - 1)
+        )
+      : "";
+  }, [address, isConnected]);
+
   return (
     <ConnectButton.Custom>
       {({
@@ -80,7 +88,7 @@ export const ConnectBtn = () => {
                 );
               }
               return (
-                <div style={{ display: "flex", gap: 12 }}>
+                <Flex gap={"20px"}>
                   <Button
                     onClick={openAccountModal}
                     type="button"
@@ -95,9 +103,12 @@ export const ConnectBtn = () => {
                     fontSize={"21px"}
                     fontWeight={"medium"}
                   >
-                    Connected
+                    {addr}
                   </Button>
-                </div>
+                  <Flex display={isConnected ? "flex" : "none"}>
+                    <Image src={"user.svg"} alt={"user"} opacity={"80%"} />
+                  </Flex>
+                </Flex>
               );
             })()}
           </div>
