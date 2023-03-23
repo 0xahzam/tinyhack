@@ -32,9 +32,11 @@ export default function Nav() {
         align={"center"}
       >
         <Flex gap={"25px"} align={"center"}>
-          <Text fontSize={"26px"} fontWeight={"bold"} userSelect={"none"}>
-            Tinyhack
-          </Text>
+          <Link href="./">
+            <Text fontSize={"26px"} fontWeight={"bold"} userSelect={"none"}>
+              Tinyhack
+            </Text>
+          </Link>
           <Flex gap={"16px"} align={"center"}>
             <Link href={"./problems"}>
               <Text
