@@ -4,21 +4,9 @@ import { Flex } from "@chakra-ui/react";
 import axios from "axios";
 import { useState, useEffect } from "react";
 
-export default function problems() {
-  const [ques, setQues] = useState([]);
+function problems({ data }) {
+  const [ques, setQues] = useState(data);
   const highlight = [0];
-  async function getQuestions() {
-    try {
-      const response = await axios.get("/api/script");
-      setQues(response.data);
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
-  useEffect(() => {
-    getQuestions();
-  }, [ques]);
 
   return (
     <Flex
@@ -47,17 +35,18 @@ export default function problems() {
             />
           </div>
         ))}
-
-        {/* <Card solved={"true"} tag={"DEFI"} title={"Uniswap Validation"} />
-        <Card solved={"false"} tag={"DEFI"} title={"Uniswap Validation"} />
-        <Card solved={"false"} tag={"DEFI"} title={"Uniswap Validation"} />
-        <Card solved={"false"} tag={"DEFI"} title={"Uniswap Validation"} />
-        <Card solved={"false"} tag={"DEFI"} title={"Uniswap Validation"} />
-        <Card solved={"false"} tag={"DEFI"} title={"Uniswap Validation"} />
-        <Card solved={"false"} tag={"DEFI"} title={"Uniswap Validation"} />
-        <Card solved={"false"} tag={"DEFI"} title={"Uniswap Validation"} />
-        <Card solved={"false"} tag={"DEFI"} title={"Uniswap Validation"} /> */}
       </Flex>
     </Flex>
   );
 }
+
+export async function getServerSideProps() {
+  // Fetch data from external API
+  const res = await fetch(`${process.env.NEXT_PUBLIC_FETCH}/api/script`);
+  const data = await res.json();
+
+  // Pass data to the page via props
+  return { props: { data } };
+}
+
+export default problems;
