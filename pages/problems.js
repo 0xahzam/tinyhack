@@ -4,9 +4,21 @@ import { Flex } from "@chakra-ui/react";
 import axios from "axios";
 import { useState, useEffect } from "react";
 
-function problems({ data }) {
-  const [ques, setQues] = useState(data);
+export default function problems() {
+  const [ques, setQues] = useState([]);
   const highlight = [0];
+  async function getQuestions() {
+    try {
+      const response = await axios.get("/api/script");
+      setQues(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  useEffect(() => {
+    getQuestions();
+  }, [ques]);
 
   return (
     <Flex
@@ -39,14 +51,3 @@ function problems({ data }) {
     </Flex>
   );
 }
-
-export async function getServerSideProps() {
-  // Fetch data from external API
-  const res = await fetch(`${process.env.NEXT_PUBLIC_FETCH}/api/script`);
-  const data = await res.json();
-
-  // Pass data to the page via props
-  return { props: { data } };
-}
-
-export default problems;
