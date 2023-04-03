@@ -4,16 +4,19 @@ import { Flex } from "@chakra-ui/react";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { useAccount } from "wagmi";
+import { Loading } from "@nextui-org/react";
 
 export default function problems() {
   const { address, isConnected } = useAccount();
   const [ques, setQues] = useState([]);
   const [highlight, setHighlight] = useState([]);
+  const [flag, setflag] = useState(false);
 
   async function getQuestions() {
     try {
       const response = await axios.get("/api/script");
       setQues(response.data);
+      setflag(true);
     } catch (error) {
       console.error(error);
     }
@@ -54,24 +57,31 @@ export default function problems() {
       cursor={"default"}
     >
       <Nav />
-      <Flex
-        gap={"20px"}
-        flexDir={"column"}
-        marginTop={"60px"}
-        marginBottom={"60px"}
-        align={"center"}
-        color={"white"}
-      >
-        {ques.map((item) => (
-          <div key={item.id}>
-            <Card
-              solved={highlight.includes(item.id) ? "true" : "false"}
-              tag={item.router}
-              title={item.title}
-            />
-          </div>
-        ))}
-      </Flex>
+
+      {flag ? (
+        <Flex
+          gap={"20px"}
+          flexDir={"column"}
+          marginTop={"60px"}
+          marginBottom={"60px"}
+          align={"center"}
+          color={"white"}
+        >
+          {ques.map((item) => (
+            <div key={item.id}>
+              <Card
+                solved={highlight.includes(item.id) ? "true" : "false"}
+                tag={item.router}
+                title={item.title}
+              />
+            </div>
+          ))}
+        </Flex>
+      ) : (
+        <Flex h={"80vh"} justify={"center"} align={"center"}>
+          <Loading color="white" size={"lg"} />
+        </Flex>
+      )}
     </Flex>
   );
 }

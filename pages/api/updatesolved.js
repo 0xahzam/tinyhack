@@ -1,12 +1,12 @@
 import prisma from "../../lib/prisma";
 
 export default async function handler(req, res) {
-  const { id, wallet, solved } = req.query;
+  const { id, solved } = req.body;
+
   try {
     const user = await prisma.user.update({
       where: {
         id: id,
-        wallet: wallet,
       },
       data: {
         solved,
