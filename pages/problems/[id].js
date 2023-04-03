@@ -8,14 +8,19 @@ import Image from "next/image";
 import info from "../../public/info.svg";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import { cb } from "react-syntax-highlighter/dist/cjs/styles/prism";
+import BannerToast from "../../components/banner";
 
 export default function ques() {
+  const [state, newBanner] = BannerToast();
   const { address, isConnected } = useAccount();
   const router = useRouter();
   const { id } = router.query;
   const [ques, setQues] = useState([]);
   const [line, setLine] = useState("");
   const [attack, setAttack] = useState("");
+  const [users, setUsers] = useState([]);
+  const [highlight, setHighlight] = useState([]);
+  const [userid, setUserid] = useState([]);
 
   async function getQuestions() {
     try {
@@ -26,9 +31,50 @@ export default function ques() {
     }
   }
 
+  async function getUsers() {
+    try {
+      const response = await axios.get("/api/getusers");
+      setUsers(response.data);
+    } catch (error) {
+      // console.error(error);
+    }
+  }
+
   useEffect(() => {
     getQuestions();
-  }, [ques]);
+    if (isConnected) {
+      getUsers();
+      for (let i = 0; i < users.length; i++) {
+        if (address == users[i].wallet) {
+          setHighlight(users[i].solved);
+          setUserid(users[i].id);
+          break;
+        }
+      }
+    }
+  }, [ques, users]);
+
+  async function updateSolved(id, wallet, solved) {
+    try {
+      const response = await fetch("/api/updatesolved", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          id,
+          wallet,
+          solved,
+        }),
+      });
+      const result = await response.json();
+      console.log("Success:", result);
+      return result;
+    } catch (error) {
+      console.error("Error:", error);
+      return null;
+    }
+  }
 
   return (
     <Flex
@@ -45,7 +91,7 @@ export default function ques() {
       {ques.map((item) => (
         <div key={item.id}>
           {id != item.router ? (
-            <div>{item.router}</div>
+            ""
           ) : (
             <Flex mt={"92px"} w={"1302px"} justifyContent={"space-between"}>
               <Flex
@@ -142,17 +188,41 @@ export default function ques() {
                         onClick={() => {
                           if (line == item.line) {
                             if (attack == item.typeattack) {
-                              console.log("TRUE");
+                              if (!highlight.includes(item.id)) {
+                                newBanner({
+                                  message: "Correct Answer",
+                                  status: "success",
+                                });
+                                var arr = highlight;
+                                arr.push(item.id);
+                                updateSolved(userid, address, arr);
+                              } else {
+                                newBanner({
+                                  message: "Already Solved",
+                                  status: "success",
+                                });
+                                console.log("already solved");
+                              }
+                            } else {
+                              newBanner({
+                                message: "Try again",
+                                status: "error",
+                              });
                             }
+                          } else {
+                            newBanner({
+                              message: "Try again",
+                              status: "error",
+                            });
                           }
                         }}
                       >
                         Submit Answers
                       </Button>
-                      <Flex gap={"5px"} align={"center"} opacity={"60%"}>
+                      {/* <Flex gap={"5px"} align={"center"} opacity={"60%"} align={"center"}>
                         <Image src={info} height={16} width={16} alt={"info"} />
                         <Text>Hint</Text>
-                      </Flex>
+                      </Flex> */}
                     </Flex>
                   </>
                 ) : (

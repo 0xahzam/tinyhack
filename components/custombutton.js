@@ -4,10 +4,74 @@ import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { Button, Flex } from "@chakra-ui/react";
 import Image from "next/image";
 import user from "../public/user.svg";
-
+import axios from "axios";
 export const ConnectBtn = () => {
   const { address, isConnected } = useAccount();
   const [addr, setAddr] = useState();
+  const [users, setUsers] = useState([]);
+  const [present, setPresent] = useState("");
+
+  function generateId() {
+    const length = 10;
+    const characters = "0123456789";
+    let result = "";
+    for (let i = 0; i < length; i++) {
+      result += characters.charAt(
+        Math.floor(Math.random() * characters.length)
+      );
+    }
+    return result;
+  }
+
+  async function getUsers() {
+    try {
+      const response = await axios.get("/api/getusers");
+      setUsers(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  async function UserToDb(id, wallet, solved) {
+    try {
+      const response = await fetch("/api/adduser", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          id,
+          wallet,
+          solved,
+        }),
+      });
+      const result = await response.json();
+      console.log("Success:", result);
+      return result;
+    } catch (error) {
+      console.error("Error:", error);
+      return null;
+    }
+  }
+
+  useEffect(() => {
+    getUsers();
+    for (let i = 0; i < users.length; i++) {
+      const wa = users[i].wallet;
+      if (address == wa) {
+        setPresent("true");
+        break;
+      } else {
+        setPresent("false");
+      }
+    }
+
+    if (present == "false") {
+      UserToDb(generateId(), address, [0]);
+    }
+  }, [address]);
+
+  // console.log(present);
 
   useEffect(() => {
     isConnected

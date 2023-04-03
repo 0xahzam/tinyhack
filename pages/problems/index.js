@@ -3,10 +3,13 @@ import Card from "/components/card";
 import { Flex } from "@chakra-ui/react";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { useAccount } from "wagmi";
 
 export default function problems() {
+  const { address, isConnected } = useAccount();
   const [ques, setQues] = useState([]);
-  const highlight = [0,1,2,3,4];
+  const [highlight, setHighlight] = useState([]);
+
   async function getQuestions() {
     try {
       const response = await axios.get("/api/script");
@@ -16,9 +19,30 @@ export default function problems() {
     }
   }
 
+  const [users, setUsers] = useState([]);
+
+  async function getUsers() {
+    try {
+      const response = await axios.get("/api/getusers");
+      setUsers(response.data);
+    } catch (error) {
+      // console.error(error);
+    }
+  }
+
   useEffect(() => {
     getQuestions();
-  }, [ques]);
+
+    if (isConnected) {
+      getUsers();
+      for (let i = 0; i < users.length; i++) {
+        if (address == users[i].wallet) {
+          setHighlight(users[i].solved);
+          break;
+        }
+      }
+    }
+  }, [ques, users]);
 
   return (
     <Flex
@@ -41,7 +65,7 @@ export default function problems() {
         {ques.map((item) => (
           <div key={item.id}>
             <Card
-              solved={item.id in highlight ? "true" : "false"}
+              solved={highlight.includes(item.id) ? "true" : "false"}
               tag={item.router}
               title={item.title}
             />
