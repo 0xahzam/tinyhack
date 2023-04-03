@@ -1,7 +1,9 @@
 import { useAccount } from "wagmi";
 import { useEffect, useState } from "react";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
-import { Button, Flex, Image } from "@chakra-ui/react";
+import { Button, Flex } from "@chakra-ui/react";
+import Image from "next/image";
+import user from "../public/user.svg";
 
 export const ConnectBtn = () => {
   const { address, isConnected } = useAccount();
@@ -114,8 +116,8 @@ export const ConnectBtn = () => {
                   >
                     {addr}
                   </Button>
-                  <Flex display={isConnected ? "flex" : "none"}>
-                    <Image src={"user.svg"} alt={"user"} opacity={"80%"} />
+                  <Flex display={isConnected ? "flex" : "none"} opacity={"80%"}>
+                    <Image src={user} alt={"user"} height={24} width={24} />
                   </Flex>
                 </Flex>
               );

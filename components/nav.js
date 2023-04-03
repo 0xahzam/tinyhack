@@ -38,7 +38,7 @@ export default function Nav() {
             </Text>
           </Link>
           <Flex gap={"16px"} align={"center"}>
-            <Link href={"./problems"}>
+            <Link href={"/problems"}>
               <Text
                 fontSize={"21px"}
                 textDecor={header == "problems" ? "underline" : ""}
@@ -46,7 +46,7 @@ export default function Nav() {
                 Problems
               </Text>
             </Link>
-            <Text fontSize={"21px"}>Rankings</Text>
+            {/* <Text fontSize={"21px"}>Rankings</Text> */}
             <Text fontSize={"21px"}>Start Learning</Text>
           </Flex>
         </Flex>

@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 
 export default function problems() {
   const [ques, setQues] = useState([]);
-  const highlight = [0];
+  const highlight = [0,1,2,3,4];
   async function getQuestions() {
     try {
       const response = await axios.get("/api/script");
@@ -42,7 +42,7 @@ export default function problems() {
           <div key={item.id}>
             <Card
               solved={item.id in highlight ? "true" : "false"}
-              tag={item.tag}
+              tag={item.router}
               title={item.title}
             />
           </div>
