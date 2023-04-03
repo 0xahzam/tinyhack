@@ -1,6 +1,7 @@
 import prisma from "../../lib/prisma";
 
 export default async function handler(req, res) {
+  await prisma.$connect();
   if (req.method === "POST") {
     const { id, wallet, solved } = req.body;
     console.log(id, wallet, solved);
@@ -20,4 +21,5 @@ export default async function handler(req, res) {
   } else {
     res.status(405).json({ error: "Method not allowed" });
   }
+  await prisma.$disconnect();
 }
